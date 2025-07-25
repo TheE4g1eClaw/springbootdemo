@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.solera.bootcamp.springbootdemo.Contracts.IProduct;
 import com.solera.bootcamp.springbootdemo.Models.Product;
-import com.solera.bootcamp.springbootdemo.Models.ShoppingCart;
+import com.solera.bootcamp.springbootdemo.Models.Cart;
 import com.solera.bootcamp.springbootdemo.Repository.ProductRepository;
 
 @Service
@@ -54,13 +54,13 @@ public class ProductService implements IProduct{
     }
 
     @Override
-    public List<ShoppingCart> getInWhichShoppingCart(Long productId) {
+    public List<Cart> getInWhichCart(Long productId) {
         if (!productRepository.existsById(productId)) {
             throw new RuntimeException("Product not found with id: " + productId);
             
         }
         return productRepository.findById(productId).get()
-                .getShoppingCarts();
+                .getCarts();
     }
     
 }

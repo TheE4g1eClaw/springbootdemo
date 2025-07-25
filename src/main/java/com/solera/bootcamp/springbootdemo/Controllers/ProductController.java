@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.solera.bootcamp.springbootdemo.Models.Product;
-import com.solera.bootcamp.springbootdemo.Models.ShoppingCart;
+import com.solera.bootcamp.springbootdemo.Models.Cart;
 import com.solera.bootcamp.springbootdemo.Service.ProductService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -59,8 +59,8 @@ public class ProductController{
     }
 
     @GetMapping("/{productId}/carts")
-    public ResponseEntity<List<ShoppingCart>> getInWhichShoppingCart(@PathVariable Long productId) {
-        List<ShoppingCart> carts = productService.getInWhichShoppingCart(productId);
+    public ResponseEntity<List<Cart>> getInWhichCart(@PathVariable Long productId) {
+        List<Cart> carts = productService.getInWhichCart(productId);
         return ResponseEntity.ok(carts);
     }
 }

@@ -23,21 +23,21 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class ShoppingCart {
+public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToMany
-    @JoinTable(name = "shoppingcart",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "shopping_cart_id"))
+    @JoinTable(name = "cart_list",
+            joinColumns = @JoinColumn(name = "cart_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
     private List<Product> products;
 
-    @JsonIgnore
+    /*@JsonIgnore
     public Double getTotalPrice() {
         return products.stream()
                 .mapToDouble(Product::getPrice)
                 .sum();
-    }
+    }*/
 }

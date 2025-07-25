@@ -31,14 +31,13 @@ public class Product {
     private String description;
     private Double price;
 
-    @ManyToMany
-    @JoinTable(name = "shopping_cart_list",
-            joinColumns = @JoinColumn(name = "shopping_cart_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<ShoppingCart> shoppingCarts;
+    @ManyToMany(targetEntity = Cart.class, mappedBy = "products")
+    @JsonIgnore
+    private List<Cart> carts;
 
     
 }
 
-   
+
+
 
