@@ -1,11 +1,8 @@
 package com.solera.bootcamp.springbootdemo.Repository;
 
-import org.springframework.data.repository.CrudRepository;
-
+import org.springframework.data.jpa.repository.JpaRepository;
 import com.solera.bootcamp.springbootdemo.Models.ShoppingCart;
 
-public interface ShoppingCartRepository extends CrudRepository<ShoppingCart, Long> {
-    // This interface will automatically provide CRUD operations for DesiredListByMonth entities
-    // No additional methods are needed unless specific queries are required
+public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, Long> {
     
 }

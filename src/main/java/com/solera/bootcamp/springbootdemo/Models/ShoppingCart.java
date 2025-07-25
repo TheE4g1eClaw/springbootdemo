@@ -2,6 +2,9 @@ package com.solera.bootcamp.springbootdemo.Models;
 
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,12 +17,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Getter
 @Setter
 public class ShoppingCart {
@@ -33,18 +34,10 @@ public class ShoppingCart {
             inverseJoinColumns = @JoinColumn(name = "shopping_cart_id"))
     private List<Product> products;
 
+    @JsonIgnore
     public Double getTotalPrice() {
         return products.stream()
                 .mapToDouble(Product::getPrice)
                 .sum();
-    }
-
-    @Override
-    public String toString() {
-        return "{" +
-                "id=" + id +
-                ", products=" + products +
-                ", totalPrice=" + getTotalPrice() +
-                '}';
     }
 }
