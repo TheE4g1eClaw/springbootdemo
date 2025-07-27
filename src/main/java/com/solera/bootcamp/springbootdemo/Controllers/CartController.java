@@ -1,12 +1,5 @@
 package com.solera.bootcamp.springbootdemo.Controllers;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.solera.bootcamp.springbootdemo.Models.Product;
-import com.solera.bootcamp.springbootdemo.Models.Cart;
-import com.solera.bootcamp.springbootdemo.Service.CartService;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -16,14 +9,20 @@ import java.util.Set;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.solera.bootcamp.springbootdemo.Models.Cart;
+import com.solera.bootcamp.springbootdemo.Models.Product;
 import com.solera.bootcamp.springbootdemo.Models.ProductDTO;
-import org.springframework.security.core.Authentication;
+import com.solera.bootcamp.springbootdemo.Service.CartService;
 
 
 @RestController

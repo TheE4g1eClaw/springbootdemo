@@ -3,8 +3,8 @@ package com.solera.bootcamp.springbootdemo.Contracts;
 import java.util.List;
 import java.util.Set;
 
-import com.solera.bootcamp.springbootdemo.Models.Product;
 import com.solera.bootcamp.springbootdemo.Models.Cart;
+import com.solera.bootcamp.springbootdemo.Models.Product;
 
 // CRUD operations for Product
 public interface IProduct {
