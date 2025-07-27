@@ -1,0 +1,7 @@
+username,password,role,shoppingcartid
+admin,adminpass,ADMIN,0
+user,userpass,USER,1
+manager,managerpass,ADMIN,0
+juan,juanpass,USER,2
+enrique,enriquepass,USER,3
+pedro,pedropass,USER,4

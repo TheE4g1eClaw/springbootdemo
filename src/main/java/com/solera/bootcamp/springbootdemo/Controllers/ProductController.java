@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequestMapping("/API/v1/product")
+/* Only ADMIN can access edit products */
+@PreAuthorize("hasRole('ADMIN')")
 public class ProductController{
     private final ProductService productService;
 
@@ -33,6 +36,7 @@ public class ProductController{
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     public ResponseEntity<Product> getProductById(@PathVariable Long id) {
         return (productService.getProductById(id) != null) ?
                 ResponseEntity.ok(productService.getProductById(id)) :
@@ -40,6 +44,7 @@ public class ProductController{
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     public ResponseEntity<List<Product>> getAllProducts() {
         List<Product> products = productService.getAllProducts();
         return ResponseEntity.ok(products);

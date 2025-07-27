@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.solera.bootcamp.springbootdemo.Contracts.ICart;
 import com.solera.bootcamp.springbootdemo.Models.Product;
+import com.solera.bootcamp.springbootdemo.Models.ProductDTO;
 import com.solera.bootcamp.springbootdemo.Models.Cart;
 import com.solera.bootcamp.springbootdemo.Repository.CartRepository;
 
@@ -24,13 +25,9 @@ public class CartService implements ICart {
 
     @Override
     public Cart createCart(Cart cart) {
-        try {
             cart.setId(null); // Ensure the ID is null for creation
-            // Don't initialize products list - let JPA handle it
+            cart.setProducts(null); // Clear products to avoid issues with null references
             return cartRepository.save(cart);
-        } catch (Exception e) {
-            throw new RuntimeException("----------------------Failed to create cart: " + e.getMessage(), e);
-        }
     }
 
     @Override
@@ -65,7 +62,7 @@ public class CartService implements ICart {
     }
 
     @Override
-    public String addProductsToCart(Long cartId, List<Long> productIds) {
+    public String addProductsToCart(Long cartId, ProductDTO productIds) {
         // Check if the cart exists
         Cart cart = getCartById(cartId);
         if (cart == null) {
@@ -73,7 +70,7 @@ public class CartService implements ICart {
         }
         // Get products
         Set<Product> products = new HashSet<>();
-        for (Long productId : productIds) {
+        for (Long productId : productIds.getId()) {
             Product product = productService.getProductById(productId);
             if (product == null) {
                 throw new RuntimeException("Product not found with id: " + productId);
