@@ -1,6 +1,8 @@
 package com.solera.bootcamp.springbootdemo.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
@@ -8,8 +10,6 @@ import com.solera.bootcamp.springbootdemo.Contracts.ICart;
 import com.solera.bootcamp.springbootdemo.Models.Product;
 import com.solera.bootcamp.springbootdemo.Models.Cart;
 import com.solera.bootcamp.springbootdemo.Repository.CartRepository;
-import com.solera.bootcamp.springbootdemo.Service.ProductService;
-import java.util.ArrayList;
 
 @Service
 public class CartService implements ICart {
@@ -65,19 +65,28 @@ public class CartService implements ICart {
     }
 
     @Override
-    public Cart addProductToCart(Long cartId, Long productId) {
+    public String addProductsToCart(Long cartId, List<Long> productIds) {
         // Check if the cart exists
         Cart cart = getCartById(cartId);
         if (cart == null) {
             throw new RuntimeException("Cart not found with id: " + cartId);
         }
-        // Check if the product exists
-        Product product = productService.getProductById(productId);
-        if (product == null) {
-            throw new RuntimeException("Product not found with id: " + productId);
+        // Get products
+        Set<Product> products = new HashSet<>();
+        for (Long productId : productIds) {
+            Product product = productService.getProductById(productId);
+            if (product == null) {
+                throw new RuntimeException("Product not found with id: " + productId);
+            }
+            products.add(product);
         }
-        cart.getProducts().add(product);
-        return cartRepository.save(cart);
+        cart.getProducts().addAll(products);
+        cartRepository.save(cart);
+        String response = products.size() +
+                " products added to cart." +
+                "The total price of the cart is: " +
+                cart.getTotalPrice();
+        return response;
     }
 
     @Override
@@ -97,7 +106,7 @@ public class CartService implements ICart {
     }
 
     @Override
-    public List<Product> getProductsInCart(Long cartId) {
+    public Set<Product> getProductsInCart(Long cartId) {
         // Check if the cart exists
         Cart cart = getCartById(cartId);
         if (cart == null) {

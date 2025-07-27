@@ -3,6 +3,7 @@ package com.solera.bootcamp.springbootdemo.Controllers;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,8 +60,8 @@ public class ProductController{
     }
 
     @GetMapping("/{productId}/carts")
-    public ResponseEntity<List<Cart>> getInWhichCart(@PathVariable Long productId) {
-        List<Cart> carts = productService.getInWhichCart(productId);
+    public ResponseEntity<Set<Cart>> getInWhichCart(@PathVariable Long productId) {
+        Set<Cart> carts = productService.getInWhichCart(productId);
         return ResponseEntity.ok(carts);
     }
 }

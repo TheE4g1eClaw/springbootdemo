@@ -1,6 +1,7 @@
 package com.solera.bootcamp.springbootdemo.Service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
@@ -54,7 +55,7 @@ public class ProductService implements IProduct{
     }
 
     @Override
-    public List<Cart> getInWhichCart(Long productId) {
+    public Set<Cart> getInWhichCart(Long productId) {
         if (!productRepository.existsById(productId)) {
             throw new RuntimeException("Product not found with id: " + productId);
             

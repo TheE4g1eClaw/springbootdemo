@@ -1,7 +1,7 @@
 package com.solera.bootcamp.springbootdemo.Models;
 
 
-import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -12,7 +12,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,12 +31,12 @@ public class Cart {
     @JoinTable(name = "cart_list",
             joinColumns = @JoinColumn(name = "cart_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
-    private List<Product> products;
+    private Set<Product> products;
 
-    /*@JsonIgnore
+    @JsonIgnore
     public Double getTotalPrice() {
         return products.stream()
                 .mapToDouble(Product::getPrice)
-                .sum();
-    }*/
+                .reduce(0, Double::sum);
+    }
 }

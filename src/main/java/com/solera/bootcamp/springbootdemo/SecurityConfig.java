@@ -1,4 +1,4 @@
-/*package com.solera.bootcamp.springbootdemo;
+package com.solera.bootcamp.springbootdemo;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -46,11 +46,11 @@ public class SecurityConfig {
                 .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN") // USER or ADMIN can access /user/**
                 .anyRequest().authenticated() // All other requests require authentication
             )
-            .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**")) // Disable CSRF for H2 console
+            .csrf(csrf -> csrf.ignoringRequestMatchers("/API/v1/**")) // Disable CSRF for H2 console
             .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin())) // Allow H2 console frames
             .formLogin(form -> form.permitAll()) // Enable form-based login
             .httpBasic(basic -> basic.init(http)); // Enable HTTP Basic authentication
 
         return http.build();
     }
-}*/
+}

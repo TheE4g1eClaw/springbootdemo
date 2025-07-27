@@ -1,6 +1,7 @@
 package com.solera.bootcamp.springbootdemo.Contracts;
 
 import java.util.List;
+import java.util.Set;
 
 import com.solera.bootcamp.springbootdemo.Models.Product;
 import com.solera.bootcamp.springbootdemo.Models.Cart;
@@ -12,7 +13,7 @@ public interface ICart {
     List<Cart> getAllCarts();
     Cart updateCart(Long id, Cart cart);
     Boolean deleteCart(Long id);
-    Cart addProductToCart(Long cartId, Long productId);
+    String addProductsToCart(Long cartId, List<Long> productIds);
     Cart removeProductFromCart(Long cartId, Long productId);
-    List<Product> getProductsInCart(Long cartId);
+    Set<Product> getProductsInCart(Long cartId);
 }

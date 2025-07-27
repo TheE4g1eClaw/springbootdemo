@@ -1,7 +1,7 @@
 package com.solera.bootcamp.springbootdemo.Models;
 
 
-import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -33,7 +33,7 @@ public class Product {
 
     @ManyToMany(targetEntity = Cart.class, mappedBy = "products")
     @JsonIgnore
-    private List<Cart> carts;
+    private Set<Cart> carts;
 
     
 }

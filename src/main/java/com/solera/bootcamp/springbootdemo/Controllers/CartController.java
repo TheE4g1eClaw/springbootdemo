@@ -8,19 +8,22 @@ import com.solera.bootcamp.springbootdemo.Models.Cart;
 import com.solera.bootcamp.springbootdemo.Service.CartService;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
+import com.solera.bootcamp.springbootdemo.Models.ProductDTO;;
 
 
 @RestController
 @RequestMapping("/API/v1/cart")
+@PreAuthorize("hasRole('ADMIN')")
 public class CartController{
     private final CartService cartService;
 
@@ -58,10 +61,10 @@ public class CartController{
         return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/{cartId}/product/{productId}")
-    public ResponseEntity<Cart> addProductToCart(Long cartId, Long productId) {
-        Cart updatedCart = cartService.addProductToCart(cartId, productId);
-        return ResponseEntity.ok(updatedCart);
+    @PostMapping("/{cartId}/products")
+    public ResponseEntity<String> addProductsToCart(@PathVariable Long cartId, @RequestBody List<Long> productIds) {
+        String response = cartService.addProductsToCart(cartId, productIds);
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{cartId}/product/{productId}")
@@ -71,8 +74,8 @@ public class CartController{
     }
 
     @GetMapping("/{cartId}/products")
-    public ResponseEntity<List<Product>> getProductsInCart(@PathVariable Long cartId) {
-        List<Product> products = cartService.getProductsInCart(cartId);
+    public ResponseEntity<Set<Product>> getProductsInCart(@PathVariable Long cartId) {
+        Set<Product> products = cartService.getProductsInCart(cartId);
         return ResponseEntity.ok(products);
 }
     
