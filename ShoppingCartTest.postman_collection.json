@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "501860de-af9d-4ea6-914d-da4563bebe9f",
-		"name": "Shopping Cart Test Copy",
+		"_postman_id": "b1ff3fe5-1f35-4e9a-9253-65abee5add8b",
+		"name": "Shopping Cart Test",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "46977286",
-		"_collection_link": "https://www.postman.com/joint-operations-geoscientist-5651116-5166927/workspace/shoppingcart/collection/46977286-501860de-af9d-4ea6-914d-da4563bebe9f?action=share&source=collection_link&creator=46977286"
+		"_collection_link": "https://www.postman.com/joint-operations-geoscientist-5651116-5166927/workspace/shoppingcart/collection/46977286-b1ff3fe5-1f35-4e9a-9253-65abee5add8b?action=share&source=collection_link&creator=46977286"
 	},
 	"item": [
 		{
@@ -896,6 +896,79 @@
 					"response": []
 				},
 				{
+					"name": "User cleans cart",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{userPassword}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}{{BaseEndpoint}}/cart/1/products",
+							"host": [
+								"{{URL}}{{BaseEndpoint}}"
+							],
+							"path": [
+								"cart",
+								"1",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Confirm cleaning",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{adminPassword}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}{{BaseEndpoint}}/cart",
+							"host": [
+								"{{URL}}{{BaseEndpoint}}"
+							],
+							"path": [
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Admin deletes a entire cart",
 					"request": {
 						"auth": {
@@ -1001,17 +1074,17 @@
 		},
 		{
 			"key": "userPassword",
-			"value": "userpass",
+			"value": "",
 			"type": "default"
 		},
 		{
 			"key": "adminPassword",
-			"value": "adminpass",
+			"value": "",
 			"type": "default"
 		},
 		{
 			"key": "juanPassword",
-			"value": "juanpass",
+			"value": "",
 			"type": "string"
 		}
 	]

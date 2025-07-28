@@ -16,5 +16,6 @@ public interface ICart {
     Boolean deleteCart(Long id);
     String addProductsToCart(Long cartId, ProductDTO productIds);
     Cart removeProductFromCart(Long cartId, Long productId);
+    boolean removeAllProductsFromCart(Long cartId);
     Set<Product> getProductsInCart(Long cartId);
 }

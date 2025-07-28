@@ -114,6 +114,17 @@ public class CartController{
         return ResponseEntity.status(403).build(); // Forbidden if not the owner
     }
 
+    /* ADMIN and USER can remove all products from a cart */
+    @DeleteMapping("/{cartId}/products")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+    public ResponseEntity<Void> removeAllProductsFromCart(@PathVariable Long cartId, Authentication authentication) {
+        if (isUserCartOwner(cartId, authentication)) {
+            cartService.removeAllProductsFromCart(cartId);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.status(403).build(); // Forbidden if not the owner
+    }
+
     /* ADMIN and USER can view products in a cart */
     @GetMapping("/{cartId}/products")
     @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")

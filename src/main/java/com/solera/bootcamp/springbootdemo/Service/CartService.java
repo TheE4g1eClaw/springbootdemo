@@ -107,6 +107,18 @@ public class CartService implements ICart {
     }
 
     @Override
+    public boolean removeAllProductsFromCart(Long cartId) {
+        // Check if the cart exists
+        Cart cart = getCartById(cartId);
+        if (cart == null) {
+            throw new RuntimeException("Cart not found with id: " + cartId);
+        }
+        cart.getProducts().clear();
+        cartRepository.save(cart);
+        return true;
+    }
+
+    @Override
     public Set<Product> getProductsInCart(Long cartId) {
         // Check if the cart exists
         Cart cart = getCartById(cartId);
