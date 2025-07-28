@@ -60,3 +60,6 @@ FLUSH PRIVILEGES;
 ### Notes
 
 - Default users and roles are loaded from `src/main/resources/users.csv`.
+- Most useful users:
+   admin: adminpass
+   user: userpass
