@@ -33,6 +33,7 @@ spring.jpa.hibernate.ddl-auto=update
 Run these SQL commands in your MySQL client:
 
 ```sql
+DROP DATABASE IF EXISTS shopcartdb;
 CREATE DATABASE shopcartdb;
 CREATE USER 'admin'@'%' IDENTIFIED BY 'adminpass';
 GRANT ALL PRIVILEGES ON shopcartdb.* TO 'admin'@'%';
@@ -60,6 +61,7 @@ FLUSH PRIVILEGES;
 ### Notes
 
 - Default users and roles are loaded from `src/main/resources/users.csv`.
+- Some are already loaded in postman
 - Most useful users:
    admin: adminpass
    user: userpass
