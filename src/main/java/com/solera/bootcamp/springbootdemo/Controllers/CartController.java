@@ -127,6 +127,6 @@ public class CartController{
     
     private boolean isUserCartOwner(Long cartId, Authentication authentication) {
         Long userCartId = cartMap.get(authentication.getName());
-        return userCartId != null && userCartId.equals(cartId);
+        return userCartId != null && (userCartId.equals(cartId) || userCartId == 0);
     }
 }

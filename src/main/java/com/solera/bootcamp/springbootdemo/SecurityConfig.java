@@ -53,17 +53,19 @@ public class SecurityConfig {
         return new InMemoryUserDetailsManager(users);
     }
 
+    // Security config
+    // Allow access to Swagger UI  without authentication
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/h2-console/**").permitAll() // Allow H2 console access without authentication
+                //.requestMatchers("/h2-console/**").permitAll() // Allow H2 console access without authentication
                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll() // Allow Swagger UI access
                 //.requestMatchers("/API/v1/**").hasAnyRole("ADMIN", "USER") // Only ADMIN can access /admin/**
                 .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN") // USER or ADMIN can access /user/**
                 .anyRequest().authenticated() // All other requests require authentication
             )
-            .csrf(csrf -> csrf.ignoringRequestMatchers("/API/v1/**")) // Disable CSRF for H2 console
+            .csrf(csrf -> csrf.ignoringRequestMatchers("/API/v1/**")) // Disable CSRF for Swagger console
             .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin())) // Allow H2 console frames
             .formLogin(form -> form.permitAll()) // Enable form-based login
             .httpBasic(basic -> basic.init(http)); // Enable HTTP Basic authentication

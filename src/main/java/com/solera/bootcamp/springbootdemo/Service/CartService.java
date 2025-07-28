@@ -75,12 +75,16 @@ public class CartService implements ICart {
             if (product == null) {
                 throw new RuntimeException("Product not found with id: " + productId);
             }
-            products.add(product);
+            if (!cart.getProducts().contains(product)) {
+                products.add(product);
+            } 
         }
         cart.getProducts().addAll(products);
         cartRepository.save(cart);
         String response = products.size() +
                 " products added to cart." +
+                "There are now " +
+                cart.getProducts().size() + " products in the cart." +
                 "The total price of the cart is: " +
                 cart.getTotalPrice();
         return response;
